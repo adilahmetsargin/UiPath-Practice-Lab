@@ -20,19 +20,19 @@ export default function HomePage() {
               UiPath Practice Lab
             </h1>
             <p className="max-w-2xl text-lg leading-8 text-muted-foreground">
-              Learn RPA by completing practical UiPath tasks, automating fake business websites, tracking progress, and getting feedback on your workflow explanations.
+              Learn RPA by completing browser scenarios, automating fake business websites, uploading screenshot proof, and getting feedback on whether your evidence matches the task.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
             <Button size="lg" asChild>
-              <Link href="/learning">
-                Start learning
+              <Link href="/scenarios">
+                Start scenarios
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link href="/practice">
-                Open practice lab
+              <Link href="/studio">
+                Open fake Studio
                 <FlaskConical className="h-4 w-4" />
               </Link>
             </Button>
@@ -59,8 +59,8 @@ export default function HomePage() {
             </CardContent>
           </Card>
           <div className="grid gap-4 sm:grid-cols-2">
-            <Feature icon={<CheckCircle2 className="h-5 w-5" />} title="Hands-on tasks" text="Short explanations, concrete assignments, expected results, hints, and completion tracking." />
-            <Feature icon={<Trophy className="h-5 w-5" />} title="Job-focused" text="Practice selectors, Excel, web forms, scraping, exceptions, REFramework, and interview explanations." />
+            <Feature icon={<CheckCircle2 className="h-5 w-5" />} title="Evidence-based tasks" text="Open a target site, perform the exact steps, upload screenshot proof, and submit the steps you followed." />
+            <Feature icon={<Trophy className="h-5 w-5" />} title="Fake Studio workflow" text="Use a visual UiPath-style workflow screen to understand browser steps, selectors, validation, and evidence." />
           </div>
         </div>
       </section>

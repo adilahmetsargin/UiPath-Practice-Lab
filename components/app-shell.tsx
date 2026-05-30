@@ -1,10 +1,12 @@
 import Link from "next/link";
-import { Bot, ChartNoAxesColumnIncreasing, FlaskConical, GraduationCap, Home, LogIn, MessageSquareText, Settings } from "lucide-react";
+import { Bot, ChartNoAxesColumnIncreasing, FlaskConical, GraduationCap, Home, Laptop, LogIn, MessageSquareText, Settings, Workflow } from "lucide-react";
 
 const links = [
   { href: "/", label: "Home", icon: Home },
   { href: "/dashboard", label: "Dashboard", icon: ChartNoAxesColumnIncreasing },
   { href: "/learning", label: "Learning", icon: GraduationCap },
+  { href: "/scenarios", label: "Scenarios", icon: Workflow },
+  { href: "/studio", label: "Studio", icon: Laptop },
   { href: "/practice", label: "Practice Lab", icon: FlaskConical },
   { href: "/ai-feedback", label: "AI Feedback", icon: MessageSquareText },
   { href: "/auth", label: "Sign in", icon: LogIn },

@@ -6,12 +6,12 @@ export type FeedbackResult = {
   nextTask: string;
 };
 
-export async function getAiFeedback(input: string): Promise<FeedbackResult> {
+export async function getAiFeedback(input: string, expectedChecks: string[] = []): Promise<FeedbackResult> {
   const key = process.env.HF_TOKEN || process.env.HUGGINGFACE_API_KEY;
   const model = process.env.HF_MODEL || "google/flan-t5-large";
 
   if (!key) {
-    return mockFeedback(input);
+    return mockFeedback(input, expectedChecks);
   }
 
   try {
@@ -22,12 +22,12 @@ export async function getAiFeedback(input: string): Promise<FeedbackResult> {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        inputs: `Review this UiPath/RPA practice submission. Return concise feedback about what is correct, missing, improvements, and next task:\n\n${input}`
+        inputs: `Review this UiPath/RPA browser practice submission. Expected evidence checks: ${expectedChecks.join(", ") || "none provided"}. Return concise feedback about what is correct, missing, improvements, and next task:\n\n${input}`
       })
     });
 
     if (!response.ok) {
-      return mockFeedback(input);
+      return mockFeedback(input, expectedChecks);
     }
 
     const data = await response.json();
@@ -41,12 +41,13 @@ export async function getAiFeedback(input: string): Promise<FeedbackResult> {
       nextTask: "Repeat the task with one invalid input row and document how your bot handles it."
     };
   } catch {
-    return mockFeedback(input);
+    return mockFeedback(input, expectedChecks);
   }
 }
 
-function mockFeedback(input: string): FeedbackResult {
+function mockFeedback(input: string, expectedChecks: string[] = []): FeedbackResult {
   const text = input.toLowerCase();
+  const missingChecks = expectedChecks.filter((check) => !text.includes(check.toLowerCase()));
   const mentionsSelector = text.includes("selector");
   const mentionsError = text.includes("error") || text.includes("exception");
   const mentionsExcel = text.includes("excel") || text.includes("datatable");
@@ -55,12 +56,16 @@ function mockFeedback(input: string): FeedbackResult {
     source: "mock",
     correct: [
       "You included enough detail to understand the workflow goal.",
+      missingChecks.length === 0 && expectedChecks.length > 0
+        ? "Your proof mentions all required scenario evidence checks."
+        : "Your submission can be reviewed against the expected scenario evidence.",
       mentionsSelector ? "You are thinking about selector reliability, which is critical for browser bots." : "You described practical steps instead of only theory."
-    ],
+    ].filter(Boolean),
     missing: [
+      ...missingChecks.map((check) => `Evidence does not clearly mention: ${check}.`),
       mentionsError ? "Add the exact exception type and whether it is business or system related." : "Add a failure case so the workflow is testable.",
       "Include the expected output and how you verified it."
-    ],
+    ].slice(0, 5),
     improve: [
       mentionsExcel ? "Write status back to the input file so each row has an audit trail." : "Use variables for inputs instead of hard-coded values.",
       "Add logs around each major step: open page, enter data, submit, validate result."

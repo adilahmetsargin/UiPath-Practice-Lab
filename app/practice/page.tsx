@@ -10,7 +10,7 @@ const practicePages = [
   { href: "/practice/invoice-list", title: "Invoice list", text: "Scrape invoice data and classify review items." },
   { href: "/practice/dynamic-buttons", title: "Dynamic buttons", text: "Practice selectors on changing labels and target attributes." },
   { href: "/practice/error-simulation", title: "Error simulation", text: "Trigger errors, retries, screenshots, and exception handling." },
-  { href: "/practice/search-page", title: "Search page", text: "Search records and extract result counts." },
+  { href: "/practice/search-page", title: "Search page", text: "Search, click a result, and capture article detail evidence." },
   { href: "/practice/excel-data-entry", title: "Excel data entry", text: "Use spreadsheet-style inputs to populate a web table." }
 ];
 

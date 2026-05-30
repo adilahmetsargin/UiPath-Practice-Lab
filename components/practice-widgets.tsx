@@ -109,16 +109,89 @@ export function ErrorSimulationPractice() {
 }
 
 export function SearchPractice() {
-  const records = ["invoice automation", "selector repair", "excel data entry", "email notification", "pdf extraction"];
+  const records = [
+    {
+      title: "Enterprise automation playbook",
+      url: "https://practice.local/articles/enterprise-automation-playbook",
+      category: "Operations",
+      summary: "A practical guide for choosing RPA candidates, validating selectors, and documenting bot evidence."
+    },
+    {
+      title: "Selector repair checklist",
+      url: "https://practice.local/articles/selector-repair-checklist",
+      category: "QA",
+      summary: "How to inspect changing UI attributes and replace brittle selectors with stable anchors."
+    },
+    {
+      title: "Invoice automation case study",
+      url: "https://practice.local/articles/invoice-automation-case-study",
+      category: "Finance",
+      summary: "A short case study on extracting invoice data and routing business exceptions."
+    },
+    {
+      title: "Excel data entry bot pattern",
+      url: "https://practice.local/articles/excel-data-entry-bot",
+      category: "Back office",
+      summary: "Use spreadsheet rows as transactions and write a status value after each submission."
+    }
+  ];
   const [query, setQuery] = useState("");
-  const results = records.filter((record) => record.includes(query.toLowerCase()));
+  const [selected, setSelected] = useState<(typeof records)[number] | null>(null);
+  const results = records.filter((record) => `${record.title} ${record.category} ${record.summary}`.toLowerCase().includes(query.toLowerCase()));
+
+  if (selected) {
+    return (
+      <PracticePanel title={selected.title}>
+        <button className="text-sm font-medium text-blue-700" onClick={() => setSelected(null)}>Back to results</button>
+        <div className="overflow-hidden rounded-lg border">
+          <div className="bg-blue-700 p-8 text-white">
+            <p className="text-sm opacity-80">Practice article</p>
+            <h2 className="mt-2 text-3xl font-semibold">{selected.title}</h2>
+          </div>
+          <div className="grid gap-4 bg-white p-6 md:grid-cols-[1fr_220px]">
+            <article className="space-y-4">
+              <p className="text-sm font-medium text-primary">Category: {selected.category}</p>
+              <p className="leading-7 text-muted-foreground">{selected.summary}</p>
+              <p className="leading-7 text-muted-foreground">
+                This page is designed as screenshot evidence for browser automation tasks. A completed run should show the article title, category, and URL-like label below.
+              </p>
+              <div className="rounded-md border bg-slate-50 p-3 text-sm">{selected.url}</div>
+            </article>
+            <aside className="rounded-md border bg-slate-50 p-4">
+              <p className="font-medium">Evidence targets</p>
+              <ul className="mt-3 list-inside list-disc space-y-2 text-sm text-muted-foreground">
+                <li>Visible title</li>
+                <li>Visible category</li>
+                <li>Readable summary</li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+      </PracticePanel>
+    );
+  }
+
   return (
-    <PracticePanel title="Knowledge Base Search">
-      <label className="grid gap-1 text-sm font-medium">Search keyword<input value={query} onChange={(event) => setQuery(event.target.value)} className="rounded-md border p-2" /></label>
+    <PracticePanel title="Search Practice">
+      <div className="rounded-lg border bg-slate-50 p-5">
+        <label className="grid gap-2 text-sm font-medium">
+          Search keyword
+          <div className="flex items-center gap-2 rounded-full border bg-white px-4 py-2">
+            <Search className="h-4 w-4 text-muted-foreground" />
+            <input value={query} onChange={(event) => setQuery(event.target.value)} className="w-full bg-transparent text-sm outline-none" placeholder="Try automation, selector, invoice, excel" />
+          </div>
+        </label>
+      </div>
       <div className="flex items-center gap-2 text-sm text-muted-foreground"><Search className="h-4 w-4" />Result count: {query ? results.length : 0}</div>
-      <ul className="grid gap-2">
-        {query && results.map((result) => <li key={result} className="rounded-md border bg-slate-50 p-3">{result}</li>)}
-      </ul>
+      <div className="grid gap-3">
+        {query && results.map((result) => (
+          <button key={result.title} onClick={() => setSelected(result)} className="rounded-md border bg-white p-4 text-left hover:bg-slate-50">
+            <p className="text-xs text-green-700">{result.url}</p>
+            <p className="mt-1 text-lg font-medium text-blue-700">{result.title}</p>
+            <p className="mt-1 text-sm text-muted-foreground">{result.summary}</p>
+          </button>
+        ))}
+      </div>
     </PracticePanel>
   );
 }
