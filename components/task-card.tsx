@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { CheckCircle2, ExternalLink, Lightbulb, Send } from "lucide-react";
 import { PracticeTask } from "@/lib/course-data";
+import { completeLocalTask } from "@/lib/local-progress";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -45,7 +46,13 @@ export function TaskCard({ task, completed = false }: { task: PracticeTask; comp
             <Lightbulb className="h-4 w-4" />
             Hint
           </Button>
-          <Button type="button" onClick={() => setDone(true)}>
+          <Button
+            type="button"
+            onClick={() => {
+              completeLocalTask(task.id);
+              setDone(true);
+            }}
+          >
             <CheckCircle2 className="h-4 w-4" />
             Mark as completed
           </Button>

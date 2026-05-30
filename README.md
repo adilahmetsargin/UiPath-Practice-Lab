@@ -56,7 +56,7 @@ The app works without these values. Supabase status is shown on `/settings`, and
 
 - `/`: landing page
 - `/dashboard`: XP, current level, badges, and next tasks
-- `/auth`: Supabase sign-in/sign-up with mock local mode
+- `/auth`: Supabase sign-in/sign-up plus Demo mode for local progress testing
 - `/scenarios`: browser-based scenario tasks with screenshot evidence upload and AI review
 - `/studio`: fake UiPath Studio-style visual workflow screen
 - `/learning`: 13-level learning path
@@ -82,3 +82,5 @@ The app works without these values. Supabase status is shown on `/settings`, and
 The app ships with 13 levels and 52 practical tasks in `lib/course-data.ts`, covering RPA basics, UiPath Studio, variables, selectors, Excel, web automation, email, documents, scraping, debugging, REFramework, mini projects, and QA/RPA interview preparation.
 
 Scenario tasks live in `lib/scenario-data.ts`. They ask the learner to open a practice website, perform browser actions, attach screenshot evidence, write the actual steps followed, and submit the proof for AI/mock review.
+
+Progress currently saves completed task IDs in browser localStorage for demo/testing. Supabase tables are included so cloud sync can be connected after authentication is configured.
