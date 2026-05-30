@@ -56,7 +56,7 @@ export function FeedbackForm() {
         </CardHeader>
         <CardContent>
           {!feedback ? (
-            <p className="text-sm leading-6 text-muted-foreground">Feedback will appear here. If HUGGINGFACE_API_KEY is not configured, the app uses a local mock reviewer.</p>
+            <p className="text-sm leading-6 text-muted-foreground">Feedback will appear here. If HF_TOKEN is not configured, the app uses a local mock reviewer.</p>
           ) : (
             <div className="space-y-5">
               <p className="rounded-md border bg-slate-50 p-3 text-sm">Source: {feedback.source === "huggingface" ? "Hugging Face API" : "Mock reviewer"}</p>

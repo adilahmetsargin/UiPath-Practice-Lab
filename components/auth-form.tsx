@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { LogIn } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export function AuthForm() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("Use any email in mock mode, or configure Supabase to create real sessions.");
@@ -14,6 +16,7 @@ export function AuthForm() {
   async function signIn() {
     if (!supabase) {
       setMessage(`Mock session started for ${email || "practice@example.com"}. Configure Supabase for real auth.`);
+      router.push("/dashboard");
       return;
     }
 
@@ -25,6 +28,7 @@ export function AuthForm() {
     }
 
     setMessage("Signed in successfully.");
+    router.push("/dashboard");
   }
 
   return (

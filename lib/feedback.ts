@@ -7,14 +7,15 @@ export type FeedbackResult = {
 };
 
 export async function getAiFeedback(input: string): Promise<FeedbackResult> {
-  const key = process.env.HUGGINGFACE_API_KEY;
+  const key = process.env.HF_TOKEN || process.env.HUGGINGFACE_API_KEY;
+  const model = process.env.HF_MODEL || "google/flan-t5-large";
 
   if (!key) {
     return mockFeedback(input);
   }
 
   try {
-    const response = await fetch("https://api-inference.huggingface.co/models/google/flan-t5-large", {
+    const response = await fetch(`https://api-inference.huggingface.co/models/${model}`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${key}`,

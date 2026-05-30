@@ -28,10 +28,11 @@ Copy `.env.example` to `.env.local` and fill values as needed:
 ```bash
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
-HUGGINGFACE_API_KEY=
+HF_TOKEN=
+HF_MODEL=
 ```
 
-The app works without these values. Supabase status is shown on `/settings`, and AI feedback falls back to a local reviewer when `HUGGINGFACE_API_KEY` is empty.
+The app works without these values. Supabase status is shown on `/settings`, and AI feedback falls back to a local reviewer when `HF_TOKEN` is empty.
 
 ## Supabase Setup
 

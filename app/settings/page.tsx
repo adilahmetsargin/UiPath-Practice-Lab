@@ -3,7 +3,7 @@ import { isSupabaseConfigured } from "@/lib/supabase";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function SettingsPage() {
-  const hfConfigured = Boolean(process.env.HUGGINGFACE_API_KEY);
+  const hfConfigured = Boolean(process.env.HF_TOKEN || process.env.HUGGINGFACE_API_KEY);
   return (
     <section className="mx-auto max-w-4xl px-4 py-8">
       <div className="mb-8">
@@ -17,7 +17,7 @@ export default function SettingsPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <Status configured={isSupabaseConfigured} label="Supabase auth, database, and progress tracking" env="NEXT_PUBLIC_SUPABASE_URL + NEXT_PUBLIC_SUPABASE_ANON_KEY" />
-          <Status configured={hfConfigured} label="Hugging Face AI feedback" env="HUGGINGFACE_API_KEY" />
+          <Status configured={hfConfigured} label="Hugging Face AI feedback" env="HF_TOKEN + HF_MODEL" />
         </CardContent>
       </Card>
     </section>
