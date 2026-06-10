@@ -57,6 +57,7 @@ The app works without these values. Supabase status is shown on `/settings`, and
 - `/`: landing page
 - `/dashboard`: XP, current level, badges, and next tasks
 - `/auth`: Supabase sign-in/sign-up plus Demo mode for local progress testing
+- `/missions`: interactive mission path with a browser-based RPA Studio simulator
 - `/scenarios`: browser-based scenario tasks with screenshot evidence upload and AI review
 - `/studio`: fake UiPath Studio-style visual workflow screen
 - `/learning`: 13-level learning path

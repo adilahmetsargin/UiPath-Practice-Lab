@@ -25,8 +25,8 @@ export default function HomePage() {
           </div>
           <div className="flex flex-wrap gap-3">
             <Button size="lg" asChild>
-              <Link href="/scenarios">
-                Start scenarios
+              <Link href="/missions">
+                Start missions
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>

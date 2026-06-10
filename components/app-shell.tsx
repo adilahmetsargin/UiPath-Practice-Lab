@@ -4,6 +4,7 @@ import { Bot, ChartNoAxesColumnIncreasing, FlaskConical, GraduationCap, Home, La
 const links = [
   { href: "/", label: "Home", icon: Home },
   { href: "/dashboard", label: "Dashboard", icon: ChartNoAxesColumnIncreasing },
+  { href: "/missions", label: "Missions", icon: Workflow },
   { href: "/learning", label: "Learning", icon: GraduationCap },
   { href: "/scenarios", label: "Scenarios", icon: Workflow },
   { href: "/studio", label: "Studio", icon: Laptop },
